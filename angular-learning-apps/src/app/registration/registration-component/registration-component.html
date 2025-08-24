@@ -1,0 +1,114 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card shadow-lg p-4 w-100" style="max-width: 500px;">
+        <h2 class="text-center mb-4 fw-bold">User Registration</h2>
+
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{'is-invalid': userForm.get('name')?.touched && userForm.get('name')?.invalid}" />
+                @if(userForm.get('name')?.errors) {
+                @if(userForm.get('name')?.errors?.['required']) {
+                <div class="invalid-feedback">
+                    Username is required
+                </div>
+                }
+                @if(userForm.get('name')?.errors?.['minlength']) {
+                <div class="invalid-feedback" *ngIf="userForm.get('name')?.errors?.['minlength']">
+                    Minimum 3 letters are required
+                </div>
+                }
+                @if(userForm.get('name')?.errors?.['maxlength']) {
+                <div class="invalid-feedback" *ngIf="userForm.get('name')?.errors?.['maxlength']">
+                    Maximum 10 letters are allowed
+                </div>
+                }
+                }
+
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" formControlName="email" class="form-control"
+                    [ngClass]="{'is-invalid': userForm.get('email')?.touched && userForm.get('email')?.invalid}" />
+                @if(userForm.get('email')?.errors) {
+                @if(userForm.get('email')?.errors?.['required']) {
+                <div class="invalid-feedback" *ngIf="userForm.get('email')?.errors?.['required']">
+                    Email address is required
+                </div>
+                }
+                @if(userForm.get('email')?.errors?.['email']) {
+                <div class="invalid-feedback" *ngIf="userForm.get('email')?.errors?.['email']">
+                    Email is not valid
+                </div>
+                }
+                }
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" formControlName="password" class="form-control"
+                    [ngClass]="{'is-invalid': userForm.get('password')?.touched && userForm.get('password')?.invalid}" />
+                @if(userForm.get('password')?.errors) {
+                @if(userForm.get('password')?.errors?.['required']) {
+                <div class="invalid-feedback">
+                    Password is required
+                </div>
+                }
+                @if(userForm.get('password')?.errors?.['minlength']) {
+                <div class="invalid-feedback">
+                    Minimum 5 characters required
+                </div>
+
+                }
+                @if(userForm.get('password')?.errors?.['maxlength']) {
+                <div class="invalid-feedback">
+                    Maximum 7 characters allowed
+                </div>
+                }
+                }
+            </div>
+
+            <!-- Bio Upload -->
+            <div class="mb-3">
+                <label class="form-label">Upload Bio Details</label>
+                <input type="file" (change)="onFileChange($event)" class="form-control"
+                    [ngClass]="{'is-invalid': userForm.get('bioDetails')?.touched && userForm.get('bioDetails')?.invalid}" />
+                @if(userForm.get('bioDetails')?.errors?.['required']) {
+                <div class="invalid-feedback">
+                    Please upload the file
+                </div>
+                }
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="mb-3">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" formControlName="dob" class="form-control"
+                    [ngClass]="{'is-invalid': userForm.get('dob')?.touched && userForm.get('dob')?.invalid}" />
+                @if(userForm.get('dob')?.errors?.['required']) {
+                <div class="invalid-feedback">
+                    Date of Birth is required
+                </div>
+                }
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary w-100" [disabled]="userForm.invalid">
+                Submit
+            </button>
+        </form>
+
+        <!-- Show logged-in user -->
+        @if (user) {
+        <div class="mt-4 text-center">
+            <p class="fw-bold">Welcome {{ user.name }}</p>
+            <button class="btn btn-outline-danger btn-sm" (click)="logout()">Logout</button>
+        </div>
+        }
+    </div>
+</div>

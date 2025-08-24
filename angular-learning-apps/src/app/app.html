@@ -1,0 +1,26 @@
+<div class="flex justify-center items-center h-screen">
+  <h1 class="text-2xl font-bold text-center">
+    Welcome to {{ title() }}!
+  </h1>
+
+  <h1>Counter: {{ counter$ | async }}</h1>
+
+  <button (click)="increment()">Increment</button>
+  <button (click)="decrement()">Decrement</button>
+  <button (click)="reset()">Reset</button>
+  <button (click)="customIncrement()">Custom Increment</button>
+
+  <h1>Users</h1>
+  @if (users$ | async; as users) {
+  <ul>
+    @for (u of users; track u.name) {
+      <li>{{ u.name }} - {{ u.age }}</li>
+    }
+  </ul>
+}
+  <button (click)="addUser()">Add User</button>
+  <button (click)="deleteUser()">Delete User</button>
+  <button (click)="resetUser()">Reset User</button>
+</div>
+
+<router-outlet [ngClass]="{ 'myclass': true }"></router-outlet>
