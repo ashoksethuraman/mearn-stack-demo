@@ -4,11 +4,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { RegistrationRoutingModule } from './registration-routing-module';
 import { RegistrationComponent } from './registration-component/registration-component';
+import { DebounceclickDirective } from '../directives/debounce';
 
 
 @NgModule({
   declarations: [
-    RegistrationComponent
+    RegistrationComponent,
+    DebounceclickDirective
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: 'registration',
     loadChildren: () => import('./registration/registration-module').then(m => m.RegistrationModule)
+    // canActivate: [AuthGuard]
   }
 ];
 @NgModule({

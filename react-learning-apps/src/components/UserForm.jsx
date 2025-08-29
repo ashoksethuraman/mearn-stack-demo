@@ -68,7 +68,21 @@ export default function UserForm({ userEditData = {}, edit = false }) {
         }
     }
 
-    return (
+    return (<>
+        <div className="p-6">
+            {(
+                <>
+                    <h2>Welcome, {user?.name} with Context login 👋</h2>
+                    <button
+                        onClick={() => logout()}
+                        className="bg-red-500 text-white px-4 py-2 rounded"
+                    >
+                        Logout
+                    </button>
+                </>
+            )}
+        </div>
+
 
         <div className="user-form flex items-center justify-center min-h-screen bg-gray-100">
             {showAlert && <AlertModel isOpen={showAlert} isClose={() => setShowAlert(false)} message={alertMessage} />}
@@ -165,12 +179,8 @@ export default function UserForm({ userEditData = {}, edit = false }) {
                     disabled={!isValid}
                     className="disabled:bg-grey-500 disabled:cursor-not-allowed w-full bg-blue-300 hover:bg-blue-600 text-center p-2">Submit </button>
             </form>
-
-            <div>
-                <p>Welcome {user?.name}</p>
-                <button onClick={logout}>Logout</button>
-            </div>
         </div>
+    </>
 
     );
 }

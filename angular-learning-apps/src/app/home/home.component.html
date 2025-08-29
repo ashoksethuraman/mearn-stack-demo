@@ -28,12 +28,12 @@
                 {{ user.dateOfBirth ? (user.dateOfBirth | date:'dd/MM/yyyy') : '' }}
               </td>
               <td>
-                <button (click)="handleDownload(user)" class="btn btn-link text-primary p-0">
+                <button  appDebounce [debounceTime]="1000" (debounceClick)="handleEdit(user)" (click)="handleDownload(user)" class="btn btn-link text-primary p-0">
                   Download
                 </button>
               </td>
               <td>
-                <button class="btn btn-sm btn-outline-primary me-2" (click)="handleEdit(user)">Edit</button>
+                <button appDebounce [debounceTime]="1000" (debounceClick)="handleEdit(user)" class="btn btn-sm btn-outline-primary me-2" >Edit</button>
                 <button class="btn btn-sm btn-outline-danger" (click)="handleDelete(user._id)">Delete</button>
               </td>
             </tr>
@@ -57,7 +57,7 @@
         }
       </ul>
 
-      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+      <button appDebounce [debounceTime]="1000" (debounceClick)="goToPage(currentPage + 1)"  [disabled]="currentPage === totalPages"
         class="btn btn-primary btn-sm">
         Next
       </button>

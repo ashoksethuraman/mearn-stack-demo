@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "../redux/userSlice";
 import { FiDownload } from "react-icons/fi";
 import UserUpdateModal from "../utils/userUpdateModel";
 
+
 function Home() {
+    const dispatch = useDispatch();
+    const { user: reduxUser, isAuthenticated } = useSelector((state) => state.user);
     const rowsPerPage = 4;
     const [user, setUser] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +40,12 @@ function Home() {
         };
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (reduxUser) {
+            console.log('reduxUser ::', reduxUser);            
+        }
+    }, [reduxUser]);
 
     const handleDownload = (user) => {
         console.log('user ::', user);
@@ -78,7 +89,29 @@ function Home() {
         }
     }
 
-    return (
+    return (<>
+
+        <div className="p-6">
+            {isAuthenticated ? (
+                <>
+                    <h2>Welcome, {reduxUser.name} with Redux login 👋</h2>
+                    <button
+                        onClick={() => dispatch(logout())}
+                        className="bg-red-500 text-white px-4 py-2 rounded"
+                    >
+                        Logout
+                    </button>
+                </>
+            ) : (
+                <button
+                    onClick={() => dispatch(login({ name: "Ashok", email: "ashok@test.com" }))}
+                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                    Login
+                </button>
+            )}
+        </div>
+        
 
         <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-2xl mx-auto mt-10">
             <table className="w-full text-left table-auto border-collapse">
@@ -153,6 +186,8 @@ function Home() {
 
             <UserUpdateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} user={selectedUser} />
         </div>
+
+    </>
 
     );
 }

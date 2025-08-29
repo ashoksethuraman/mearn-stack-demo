@@ -2,7 +2,7 @@
     <div class="card shadow-lg p-4 w-100" style="max-width: 500px;">
         <h2 class="text-center mb-4 fw-bold">User Registration</h2>
 
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="userForm">
 
             <!-- Username -->
             <div class="mb-3">
@@ -98,7 +98,7 @@
             </div>
 
             <!-- Submit -->
-            <button type="submit" class="btn btn-primary w-100" [disabled]="userForm.invalid">
+            <button type="submit" appDebounce [debounceTime]="1000" (debounceClick)="onSubmit()" class="btn btn-primary w-100" [disabled]="userForm.invalid">
                 Submit
             </button>
         </form>

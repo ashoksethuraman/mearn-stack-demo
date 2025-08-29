@@ -9,11 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { appInterceptor } from './services/app.interceptor';
 import { counterReducers } from './NgRxStore/counter.reducers';
 import { userReducers } from './NgRxStore/user/user.reducer';
+import { DebounceclickDirective } from './directives/debounce';
+import { CapitalizePipe } from './pipes/capitalize-pipe'
 
 @NgModule({
   declarations: [
     App,
-    HomeComponent
+    HomeComponent,
+    DebounceclickDirective,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,
