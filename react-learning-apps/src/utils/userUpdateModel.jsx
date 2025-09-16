@@ -1,5 +1,7 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import UserForm from "../components/UserForm";
+
+const lazyUserForm = lazy(() => import("../components/UserForm"));
 
 export default function UserUpdateModal({ isOpen, onClose, user, onUpdate }) {
     if (!isOpen) return null; // hide if modal not open
@@ -7,7 +9,9 @@ export default function UserUpdateModal({ isOpen, onClose, user, onUpdate }) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center overflow-auto">
             <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-4xl">
                 <h2 className="text-2xl font-bold mb-4">Edit User Details</h2>
-                <UserForm userEditData={user} edit={true} />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <lazyUserForm userEditData={user} edit={true} />
+                </Suspense>
                 <div className="flex justify-end gap-2 mt-4">
                     <button
                         type="button"

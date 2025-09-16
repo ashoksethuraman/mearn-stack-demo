@@ -1,9 +1,14 @@
 import express from "express";
+import cors from "cors";
+
 import userRouter from './src/routes/userRoute.js';
 import {connectDatabase} from "./src/models/database.js";
 
 const app = express();
 const PORT = 3010;
+
+// Allow all origins (for dev)
+app.use(cors());
 
 app.use(express.json()); // parsing the request as json
 

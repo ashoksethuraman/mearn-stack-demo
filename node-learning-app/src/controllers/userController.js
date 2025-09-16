@@ -1,7 +1,14 @@
+import { use } from 'react';
 import { user } from '../models/user.js';
+
+const changeStream = user.watch();
+changeStream.on('change', (change) => {
+  console.log(change);
+});
 
 async function getUsers(req, res, next) {
     try {
+        // user.find({}, {name:1, email:1, _id:1, password:1,file:0})
         const users = await user.find();
         // console.log('users Fetch::', users);
         res.status(200).json(users);

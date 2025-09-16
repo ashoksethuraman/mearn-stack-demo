@@ -12,10 +12,18 @@ export default function UserForm({ userEditData = {}, edit = false }) {
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
 
-    const { register, handleSubmit, setValue, control,
-        formState: { errors, isValid, touchedFields, dirtyFields } } = useForm({
-            mode: 'onChange',
-            defaultValues: userEditData ? userEditData : {}
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        control,
+        formState: {
+            errors,
+            isValid,
+            touchedFields,
+            dirtyFields
+        } } = useForm({
+            mode: 'onChange', defaultValues: userEditData ? userEditData : {}
         });
 
     const userSubmit = async (data) => {

@@ -1,4 +1,4 @@
-import mongoose, { model, Schema } from "mongoose";
+import mongoose, { model, mongo, Schema } from "mongoose";
 
 const FileSchema = new mongoose.Schema({
     filename: String,
@@ -38,9 +38,26 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now // Sets default value to current date/time
-    },
+    }
 });
 
+// to add the  joining table subscripes with _id  to channelId in subscriber table
+// UserSchema.virtual('subscribers', {
+//   ref: 'Subscription',
+//   localField: '_id',
+//   foreignField: 'channelId',
+//   justOne: false,
+//   count: true,
+//   match: { userId: this._id }
+// });
 const user = mongoose.model("Users", userSchema);
+
+
+//  To  join the table 
+// productId: {
+//         type: mongoose.Schema.ObjectId,
+//         ref:"user"
+
+//     }
 
 export { user };
